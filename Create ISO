@@ -1,0 +1,9 @@
+Add-EsxSoftwareDepot https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml
+Export-ESXImageProfile -ImageProfile "ESXi-7.0U2a-17867351-standard" -ExportToBundle -filepath ESXi-7.0U2a-17867351-standard.zip
+Remove-EsxSoftwareDepot https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml
+Add-EsxSoftwareDepot .\ESXi-7.0U2a-17867351-standard.zip
+Add-EsxSoftwareDepot .\ESXi702-VMKUSB-NIC-FLING-47140841-component-18150468.zip
+New-EsxImageProfile -CloneProfile "ESXi-7.0U2a-17867351-standard" -name "ESXi-7.0U2a-17867351-USBNIC" -Vendor "virten.net"
+Add-EsxSoftwarePackage -ImageProfile "ESXi-7.0U2a-17867351-USBNIC" -SoftwarePackage "vmkusb-nic-fling"
+Export-ESXImageProfile -ImageProfile "ESXi-7.0U2a-17867351-USBNIC" -ExportToIso -filepath ESXi-7.0U2a-17867351-USBNIC.iso
+Export-ESXImageProfile -ImageProfile "ESXi-7.0U2a-17867351-USBNIC" -ExportToBundle -filepath ESXi-7.0U2a-17867351-USBNIC.zip
